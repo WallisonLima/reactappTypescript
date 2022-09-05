@@ -8,6 +8,7 @@ export function Home() {
 
   const [studentName, setStudentName] = useState("");
   const [students, setStudents] = useState([]);
+  const [user, setUser] = useState({ name: '', avatar: ''});
 
 
   function handleAddStudent() {
@@ -26,7 +27,14 @@ export function Home() {
 
 
   useEffect(() => {
-    console.log('O useEffect foi executado')
+    fetch('https://api.github.com/users/WallisonLima')
+    .then((response) => response.json())
+    .then((data) => {
+      setUser({
+        name: data.name,
+        avatar: data.avatar_url
+      })
+    })
   }, [])
 
   return (
@@ -34,8 +42,8 @@ export function Home() {
       <header>
         <h1>Lista de presença</h1>
         <div>
-          <strong>Wallison Lima</strong>
-          <img src='https://github.com/WallisonLima.png' alt='Foto de perfil' />
+          <strong>{user.name}</strong>
+          <img src={user.avatar} alt='Foto de perfil' />
         </div>
       </header>
       <input
