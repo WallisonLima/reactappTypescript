@@ -8,7 +8,7 @@ export function Home() {
 
   const [studentName, setStudentName] = useState("");
   const [students, setStudents] = useState([]);
-  const [user, setUser] = useState({ name: '', avatar: ''});
+  const [user, setUser] = useState({ name: '', avatar: '' });
 
 
   function handleAddStudent() {
@@ -27,14 +27,19 @@ export function Home() {
 
 
   useEffect(() => {
-    fetch('https://api.github.com/users/WallisonLima')
-    .then((response) => response.json())
-    .then((data) => {
+
+    async function fetchData() {
+      const response = await fetch('https://api.github.com/users/WallisonLima')
+      const data = await response.json()
+
       setUser({
         name: data.name,
         avatar: data.avatar_url
       })
-    })
+    }
+
+    fetchData();
+
   }, [])
 
   return (
