@@ -1,6 +1,6 @@
 import './styles.css';
 
-type PropsCard = {
+export type PropsCard = {
     name: string;
     time: string;
 }
